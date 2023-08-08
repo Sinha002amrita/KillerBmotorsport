@@ -1,0 +1,47 @@
+package killerBmotorsport;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+
+public class Addtocart {
+
+	public static void main(String[] args) throws InterruptedException {
+		// TODO Auto-generated method stub
+
+		//WebDriverManager.chromedriver().setup();
+
+		System.setProperty("webdriver.chrome.driver", "C:\\Users\\Admin08\\Downloads\\chromedriver_win32 (2)\\chromedriver.exe");
+		WebDriver driver = new ChromeDriver();
+		
+		driver.manage().window().maximize();
+		driver.get("https://www.killerbmotorsport.net/");
+		
+		driver.findElement(By.tagName("a")).click();
+		driver.findElement(By.id("email")).sendKeys("testinlive@mailinator.com");
+		driver.findElement(By.id("pass")).sendKeys("Livetest");
+		driver.findElement(By.id("send2")).click();
+
+		Thread.sleep(1000);
+		Actions action = new Actions(driver);
+		WebElement shopMenu= driver.findElement(By.xpath("//div/ul/li[2]/a/span"));
+		action.moveToElement(shopMenu);
+		action.click().build().perform();
+		
+		driver.findElement(By.linkText("OTHER COOL STUFF")).click();
+		driver.findElement(By.linkText("Killer B Motorsport Water Bottle")).click();
+		
+		Thread.sleep(2000);
+		driver.findElement(By.id("product-addtocart-button")).click();
+		
+		
+		Thread.sleep(2000);
+		driver.findElement(By.xpath("//a[@title='Checkout']")).click();
+		driver.findElement(By.xpath("//button[@title='Proceed to Checkout']")).click();
+		
+		driver.quit();
+
+	}
+}
